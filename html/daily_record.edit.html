@@ -56,73 +56,61 @@
        frozen       python:utils.range_frozen (db._db, user, form_date);
        daterange    python:request.filterspec.get('date')
       ">
-      <table class="list">
-       <tr class="time-nav">
-        <th colspan="7">
-         <table class="list">
-          <tr class="time-nav" tal:define="date python:pdict ['date'];">
-           <th>
-            <a tal:attributes="href python:utils.prev_week (db, request)">
-             &lt;&lt;&nbsp;previous
-            </a>
-           </th>
-           <th>
-             <input type="hidden" name="@sort"     value="date">
-             <input type="hidden" name="@group"    value="user">
-             <input type="hidden" name="@filter"   value="date,user">
-             <input type="hidden" name="@action"   value="daily_record_edit_action">
-             <input type="hidden" name="@template" value="edit">
-             <input type="hidden" name="@pagesize"
-              tal:attributes="value python:request.form.getvalue ('@pagesize')
-              or '50'">
-             <input type="hidden" name="@startwith"
-              tal:attributes="value python:request.form.getvalue ('@startwith')
-              or '0'">
-             <input type="hidden" name="user" tal:attributes="value user">
-             &nbsp;
-           </th>
-           <th>&nbsp;</th>
-           <th style="text-align:right;"
-               tal:content="structure
-                   python:utils.fieldname ('daily_record', 'week', endswith = ':')"/>
-           <th>
-             <input type="text" size="7" name="weekno"
-              onChange="document.forms.edit_daily_record ['@action'].value =
-                  'weekno_action';
-                if(submit_once()){document.edit_daily_record.submit ();}">
-           </th>
-           <th style="text-align:right;"
-            tal:content="structure
-                python: utils.fieldname ('daily_record', 'date', endswith = ':')"/>
-           <th>
-            <input type="text" size="22"
-             tal:attributes="value python:date.pretty_ids (form_date)
-                            ;name  python:date.searchname
-                            "
-             onChange="document.forms.edit_daily_record ['@action'].value =
-                  'daily_record_edit_action';
-                if(submit_once()){document.edit_daily_record.submit ();}">
-           </th>
-           <th>&nbsp;</th>
-           <th>&nbsp;</th>
-           <th>
-            <a tal:attributes="href python:utils.next_week (db, request)">
-             next&nbsp;&gt;&gt;
-            </a>
-           </th>
-          </tr>
-         </table>
-        </th>
-        <th tal:condition="python:edit_ok and is_open" colspan="2"/>
-        <th tal:condition="python:edit_ok and is_open and not frozen"
-            style="text-align:left">
-         <input type="button" value=" Save " i18n:attributes="value"
-          onClick="document.forms.edit_daily_record ['@action'].value =
-              'daily_record_edit_action';
-            if(submit_once()){document.edit_daily_record.submit ();}">
-        </th>
-       </tr>
 
+     <!-- Time navigation of time record table -->
+     <div class="time-nav">
+         <div tal:define="date python:pdict ['date'];">
+             <a tal:attributes="href python:utils.prev_week (db, request)"><button>&lt;&lt;&nbsp;previous</button></a>
+             <span>
+                 <input type="hidden" name="@sort"     value="date">
+                 <input type="hidden" name="@group"    value="user">
+                 <input type="hidden" name="@filter"   value="date,user">
+                 <input type="hidden" name="@action"   value="daily_record_edit_action">
+                 <input type="hidden" name="@template" value="edit">
+                 <input type="hidden" name="@pagesize"
+                        tal:attributes="value python:request.form.getvalue ('@pagesize')
+                              or '50'">
+                 <input type="hidden" name="@startwith"
+                        tal:attributes="value python:request.form.getvalue ('@startwith')
+                              or '0'">
+                 <input type="hidden" name="user" tal:attributes="value user">
+            </span>
+            <span style="text-align:right;"
+                tal:content="structure
+                       python:utils.fieldname ('daily_record', 'week', endswith = ':')">
+            </span>
+            <input type="text" size="7" name="weekno"
+                   onChange="document.forms.edit_daily_record ['@action'].value =
+                         'weekno_action';
+                         if(submit_once()){document.edit_daily_record.submit ();}">
+
+            <span style="text-align:right;"
+                 tal:content="structure
+                        python: utils.fieldname ('daily_record', 'date', endswith = ':')">
+            </span>
+             <input type="text" size="22"
+                   tal:attributes="value python:date.pretty_ids (form_date)
+                         ;name  python:date.searchname
+                         "
+                   onChange="document.forms.edit_daily_record ['@action'].value =
+                         'daily_record_edit_action';
+                         if(submit_once()){document.edit_daily_record.submit ();}">
+
+             <a tal:attributes="href python:utils.next_week (db, request)"><button>next&nbsp;&gt;&gt;</button></a>
+
+             <!-- 
+             <span tal:condition="python:edit_ok and is_open and not frozen" style="text-align:left">
+                 <input type="button" value=" Save " i18n:attributes="value"
+                        onClick="document.forms.edit_daily_record ['@action'].value =
+                                'daily_record_edit_action';
+                                if(submit_once()){document.edit_daily_record.submit ();}">
+             </span>
+             -->
+        </div>
+     </div>
+
+     <!-- Time record table -->
+     <table class="list">
        <tal:block tal:condition="context/is_view_ok"
         tal:define="timestamp python:utils.start_timer (utils)">
         <tr>
