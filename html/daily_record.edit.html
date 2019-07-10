@@ -60,7 +60,7 @@
      <!-- Time navigation of time record table -->
      <div class="time-nav">
          <div tal:define="date python:pdict ['date'];">
-             <a tal:attributes="href python:utils.prev_week (db, request)"><button>&lt;&lt;&nbsp;previous</button></a>
+             <button tal:attributes="onclick python:utils.prev_week (db, request)">&lt;&lt;&nbsp;previous</button>
              <span>
                  <input type="hidden" name="@sort"     value="date">
                  <input type="hidden" name="@group"    value="user">
@@ -95,17 +95,7 @@
                    onChange="document.forms.edit_daily_record ['@action'].value =
                          'daily_record_edit_action';
                          if(submit_once()){document.edit_daily_record.submit ();}">
-
-             <a tal:attributes="href python:utils.next_week (db, request)"><button>next&nbsp;&gt;&gt;</button></a>
-
-             <!-- 
-             <span tal:condition="python:edit_ok and is_open and not frozen" style="text-align:left">
-                 <input type="button" value=" Save " i18n:attributes="value"
-                        onClick="document.forms.edit_daily_record ['@action'].value =
-                                'daily_record_edit_action';
-                                if(submit_once()){document.edit_daily_record.submit ();}">
-             </span>
-             -->
+             <button tal:attributes="onclick python:utils.next_week (db, request)">next&nbsp;&gt;&gt;</button>
         </div>
      </div>
 
