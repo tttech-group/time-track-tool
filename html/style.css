@@ -861,12 +861,8 @@ a[href]:link.back-to-top {
     color: #FFFF99;
 }
 
-/* css for new time navigation */
-div.time-nav {
-    background-color: #eef;
-}
+/* css for new time navigation in Time Tracker daily records */
 div.time-nav a {
-    background-color: #eef;
     color: #404070 !important;
     font-weight:bold;
 }
