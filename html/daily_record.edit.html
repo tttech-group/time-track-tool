@@ -301,13 +301,14 @@
        </tal:block>
       </table>
 
-
      <!-- Time navigation buttons for user-->
        <div class="time-nav" tal:condition="python:mod_ok">
-          <tal:block tal:condition="python:is_open and not frozen"
-           tal:replace="structure python:utils.button_submit_to
-           (db, user, daterange)">
-          </tal:block>
+           <tal:block tal:condition="python:is_open and edit_ok and not frozen">
+               <input type="button" value=" Save " i18n:attributes="value"
+                      onClick="document.forms.edit_daily_record ['@action'].value =
+                'daily_record_edit_action';
+              if (submit_once()){document.edit_daily_record.submit ();}">
+           </tal:block>
 
           <tal:block tal:condition="python:
            not is_open and is_submitted and not aprv_ok and not frozen"
@@ -321,24 +322,21 @@
             (daterange, 'reopen', i18n.gettext ('edit again'))">
           </tal:block>
 
-          <tal:block tal:condition="python:is_open and edit_ok and not frozen">
-           <input type="button" value=" Save " i18n:attributes="value"
-            onClick="document.forms.edit_daily_record ['@action'].value =
-                'daily_record_edit_action';
-              if (submit_once()){document.edit_daily_record.submit ();}">
+          <tal:block tal:condition="python:is_open and not frozen"
+           tal:replace="structure python:utils.button_submit_to
+           (db, user, daterange)">
           </tal:block>
        </div>
 
-
        <!-- Time navigation buttons supervisor -->
         <div tal:condition="python: not is_open and is_submitted and aprv_ok">
-                <tal:block tal:condition="not:frozen"
-                           tal:replace="structure python:utils.button_action
-                                          (daterange, 'deny', i18n.gettext ('deny'))"/>
+           <tal:block tal:condition="not:frozen"
+            tal:replace="structure python:utils.button_action
+              (daterange, 'deny', i18n.gettext ('deny'))"/>
 
-                <tal:block tal:condition="not:frozen"
-                           tal:replace="structure python:utils.button_action
-                                          (daterange, 'approve', i18n.gettext ('approve'))"/>
+           <tal:block tal:condition="not:frozen"
+            tal:replace="structure python:utils.button_action
+              (daterange, 'approve', i18n.gettext ('approve'))"/>
        </div>
      </tal:block>
     </form>
