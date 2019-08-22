@@ -6717,3 +6717,6 @@ msgstr "Time Category Report"
 
 msgid "last_updated"
 msgstr "Last updated"
+
+msgid "timetracking_by"
+msgstr "Timetracking By"
