@@ -6762,3 +6762,6 @@ msgstr "ADIF Mode"
 
 msgid "adif_submode"
 msgstr "ADIF Submode"
+
+msgid "timetracking_by"
+msgstr "Timetracking By"
