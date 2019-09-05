@@ -18,6 +18,15 @@ properties = \
         , 'name'
         ]
       )
+    , ( 'auto_wp'
+      , [ 'contract_type'
+        , 'duration'
+        , 'is_valid'
+        , 'name'
+        , 'org_location'
+        , 'time_project'
+        ]
+      )
     , ( 'contract_type'
       , [ 'description'
         , 'name'
@@ -149,7 +158,8 @@ properties = \
         ]
       )
     , ( 'org_location'
-      , [ 'do_leave_process'
+      , [ 'do_auto_wp'
+        , 'do_leave_process'
         , 'location'
         , 'name'
         , 'organisation'
@@ -350,7 +360,8 @@ properties = \
         ]
       )
     , ( 'time_wp'
-      , [ 'bookers'
+      , [ 'auto_wp'
+        , 'bookers'
         , 'cost_center'
         , 'description'
         , 'durations_allowed'
@@ -447,6 +458,7 @@ properties = \
         , 'contract_type'
         , 'daily_worktime'
         , 'department'
+        , 'do_auto_wp'
         , 'durations_allowed'
         , 'hours_fri'
         , 'hours_mon'

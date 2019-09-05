@@ -32,7 +32,7 @@
 from roundup.hyperdb import Class
 from common          import tt_clearance_by
 from freeze          import frozen
-from roundup.date    import Interval
+from roundup         import date
 from schemacfg       import schemadef
 import sum_common
 import common
@@ -47,6 +47,7 @@ def init \
     , Multilink
     , Boolean
     , Number
+    , Interval
     , Department_Class
     , Location_Class
     , Organisation_Class
@@ -293,6 +294,7 @@ def init \
         , has_expiration_date   = Boolean   ()
         , time_wp_summary_no    = Link      ("time_wp_summary_no")
         , epic_key              = String    ()
+        , auto_wp               = Link      ("auto_wp")
         )
 
     time_wp_summary_no = Class \
@@ -310,6 +312,18 @@ def init \
         , wps                   = Multilink ("time_wp")
         )
     time_wp_group.setkey ("name")
+
+    auto_wp = Class \
+        ( db
+        , ''"auto_wp"
+        , name                  = String    ()
+        , org_location          = Link      ("org_location")
+        , contract_type         = Link      ('contract_type')
+        , time_project          = Link      ("time_project")
+        , duration              = Interval  ()
+        , is_valid              = Boolean   ()
+        )
+    auto_wp.setkey ("name")
 
     overtime_period = Class \
         ( db
@@ -364,6 +378,7 @@ def init \
         , sap_cc                = Link      ("sap_cc")
         , max_flexitime         = Number    ()
         , vac_aliq              = Link      ("vac_aliq",     do_journal = "no")
+        , do_auto_wp            = Boolean   ()
         )
 
     leave_status = Class \
@@ -497,6 +512,7 @@ def init \
                 , vacation_yearly            = Number    ()
                 , do_leave_process           = Boolean   ()
                 , vac_aliq                   = Link      ("vac_aliq")
+                , do_auto_wp                 = Boolean   ()
                 )
             ancestor.__init__ (self, db, classname, ** properties)
         # end def __init__
@@ -544,6 +560,10 @@ def security (db, ** kw) :
           , ["User"]
           , ["Office"]
           )
+        , ( "auto_wp"
+          , ["HR"]
+          , ["HR"]
+          )
         , ( "contract_type"
           , ["HR", "HR-vacation", "HR-leave-approval", "controlling"]
           , ["HR-vacation"]
@@ -573,10 +593,6 @@ def security (db, ** kw) :
           , []
           )
         , ( "leave_status"
-          , ["User"]
-          , []
-          )
-        , ( "timesheet"
           , ["User"]
           , []
           )
@@ -637,6 +653,10 @@ def security (db, ** kw) :
           , ["Project"]
           )
         , ( "time_wp_summary_no"
+          , ["User"]
+          , []
+          )
+        , ( "timesheet"
           , ["User"]
           , []
           )
@@ -875,7 +895,7 @@ def security (db, ** kw) :
            Check that no daily_record_freeze is active after date
         """
         df = db.daily_record_freeze.getnode (itemid)
-        return not frozen (db, df.user, df.date + Interval ('1d'))
+        return not frozen (db, df.user, df.date + date.Interval ('1d'))
     # end def dr_freeze_last_frozen
 
     def dynuser_thawed (db, userid, itemid) :
@@ -1163,6 +1183,7 @@ def security (db, ** kw) :
         , 'cost_center', 'creation', 'creator', 'activity', 'actor', 'id'
         , 'has_expiration_date', 'time_wp_summary_no', 'epic_key'
         )
+    wp_search_props = wp_properties + ('auto_wp',)
     p = db.security.addPermission \
         ( name        = 'View'
         , klass       = 'time_wp'
@@ -1174,10 +1195,10 @@ def security (db, ** kw) :
     p = db.security.addPermission \
         ( name        = 'Search'
         , klass       = 'time_wp'
-        , properties  = wp_properties
+        , properties  = wp_search_props
         )
     db.security.addPermissionToRole ('User', p)
-    schemadef.add_search_permission (db, 'time_wp', 'User', wp_properties)
+    schemadef.add_search_permission (db, 'time_wp', 'User', wp_search_props)
     p = db.security.addPermission \
         ( name        = 'View'
         , klass       = 'time_project'

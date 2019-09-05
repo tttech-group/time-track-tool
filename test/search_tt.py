@@ -38,6 +38,27 @@ properties = \
           )
         ]
       )
+    , ( 'auto_wp'
+      , [ ( 'contract_type'
+          , ['admin', 'hr']
+          )
+        , ( 'duration'
+          , ['admin', 'hr']
+          )
+        , ( 'is_valid'
+          , ['admin', 'hr']
+          )
+        , ( 'name'
+          , ['admin', 'hr']
+          )
+        , ( 'org_location'
+          , ['admin', 'hr']
+          )
+        , ( 'time_project'
+          , ['admin', 'hr']
+          )
+        ]
+      )
     , ( 'contract_type'
       , [ ( 'description'
           , ['admin', 'controlling', 'hr', 'hr-leave-approval', 'hr-vacation']
@@ -339,7 +360,10 @@ properties = \
         ]
       )
     , ( 'org_location'
-      , [ ( 'do_leave_process'
+      , [ ( 'do_auto_wp'
+          , ['admin', 'controlling', 'doc_admin', 'facility', 'hr', 'hr-leave-approval', 'hr-vacation', 'it', 'office', 'pgp', 'procurement', 'project', 'project_view', 'summary_view', 'time-report', 'user', 'user_view']
+          )
+        , ( 'do_leave_process'
           , ['admin', 'controlling', 'doc_admin', 'facility', 'hr', 'hr-leave-approval', 'hr-vacation', 'it', 'office', 'pgp', 'procurement', 'project', 'project_view', 'summary_view', 'time-report', 'user', 'user_view']
           )
         , ( 'location'
@@ -810,7 +834,10 @@ properties = \
         ]
       )
     , ( 'time_wp'
-      , [ ( 'bookers'
+      , [ ( 'auto_wp'
+          , ['admin', 'hr']
+          )
+        , ( 'bookers'
           , ['admin', 'controlling', 'project', 'project_view']
           )
         , ( 'cost_center'
@@ -1058,6 +1085,9 @@ properties = \
           )
         , ( 'department'
           , ["admin", "hr"]
+          )
+        , ( 'do_auto_wp'
+          , ["admin", "hr", "hr-org-location"]
           )
         , ( 'durations_allowed'
           , ["admin", "hr", "hr-org-location"]

@@ -80,6 +80,27 @@ properties = \
           )
         ]
       )
+    , ( 'auto_wp'
+      , [ ( 'contract_type'
+          , ['admin', 'hr']
+          )
+        , ( 'duration'
+          , ['admin', 'hr']
+          )
+        , ( 'is_valid'
+          , ['admin', 'hr']
+          )
+        , ( 'name'
+          , ['admin', 'hr']
+          )
+        , ( 'org_location'
+          , ['admin', 'hr']
+          )
+        , ( 'time_project'
+          , ['admin', 'hr']
+          )
+        ]
+      )
     , ( 'business_unit'
       , [ ( 'name'
           , ['admin', 'contact', 'controlling', 'doc_admin', 'facility', 'hr', 'hr-leave-approval', 'hr-vacation', 'issue_admin', 'it', 'itview', 'msgedit', 'msgsync', 'office', 'procurement', 'project', 'project_view', 'sec-incident-nosy', 'sec-incident-responsible', 'summary_view', 'supportadmin', 'time-report', 'type', 'user']
@@ -991,7 +1012,10 @@ properties = \
         ]
       )
     , ( 'org_location'
-      , [ ( 'do_leave_process'
+      , [ ( 'do_auto_wp'
+          , ['admin', 'contact', 'controlling', 'doc_admin', 'facility', 'hr', 'hr-leave-approval', 'hr-vacation', 'issue_admin', 'it', 'itview', 'msgedit', 'msgsync', 'office', 'procurement', 'project', 'project_view', 'sec-incident-nosy', 'sec-incident-responsible', 'summary_view', 'supportadmin', 'time-report', 'type', 'user']
+          )
+        , ( 'do_leave_process'
           , ['admin', 'contact', 'controlling', 'doc_admin', 'facility', 'hr', 'hr-leave-approval', 'hr-vacation', 'issue_admin', 'it', 'itview', 'msgedit', 'msgsync', 'office', 'procurement', 'project', 'project_view', 'sec-incident-nosy', 'sec-incident-responsible', 'summary_view', 'supportadmin', 'time-report', 'type', 'user']
           )
         , ( 'location'
@@ -1775,7 +1799,10 @@ properties = \
         ]
       )
     , ( 'time_wp'
-      , [ ( 'bookers'
+      , [ ( 'auto_wp'
+          , ['admin', 'hr']
+          )
+        , ( 'bookers'
           , ['admin', 'controlling', 'project', 'project_view']
           )
         , ( 'cost_center'
@@ -1969,6 +1996,9 @@ properties = \
           )
         , ( 'department'
           , ["admin", "hr"]
+          )
+        , ( 'do_auto_wp'
+          , ["admin", "hr", "hr-org-location"]
           )
         , ( 'durations_allowed'
           , ["admin", "hr", "hr-org-location"]

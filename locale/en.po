@@ -6762,3 +6762,9 @@ msgstr "ADIF Mode"
 
 msgid "adif_submode"
 msgstr "ADIF Submode"
+
+msgid "auto_wp"
+msgstr "Automatic Workpackage"
+
+msgid "do_auto_wp"
+msgstr "Create automatic workpackage"
