@@ -6771,3 +6771,9 @@ msgstr "Approved on"
 
 msgid "date_ordered"
 msgstr "Ordered on"
+
+msgid "auto_wp"
+msgstr "Automatic Workpackage"
+
+msgid "do_auto_wp"
+msgstr "Create automatic workpackage"
