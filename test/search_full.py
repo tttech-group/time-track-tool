@@ -63,6 +63,9 @@ properties = \
         , ( 'duration'
           , ['admin', 'hr']
           )
+        , ( 'durations_allowed'
+          , ['admin', 'hr']
+          )
         , ( 'is_valid'
           , ['admin', 'hr']
           )
@@ -73,6 +76,12 @@ properties = \
           , ['admin', 'hr']
           )
         , ( 'time_project'
+          , ['admin', 'hr']
+          )
+        , ( 'time_wp_summary_no'
+          , ['admin', 'hr']
+          )
+        , ( 'travel'
           , ['admin', 'hr']
           )
         ]
