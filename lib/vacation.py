@@ -32,6 +32,7 @@
 from math import ceil
 
 from roundup.date import Date, Interval
+from freeze       import freeze_date
 import common
 import user_dynamic
 
@@ -645,9 +646,6 @@ def valid_wps (db, filter = {}, user = None, date = None, srt = None) :
     d    = dict (time_start = ';%s' % date.pretty (common.ymd))
     d.update (filter)
 
-    # FIXME: At some point we may want to remove WPs that are
-    # closed before the last freeze date
-
     wp  = []
     if user :
         d1  = dict (d, is_public = True, has_expiration_date = False)
@@ -667,7 +665,17 @@ def valid_wps (db, filter = {}, user = None, date = None, srt = None) :
     return db.time_wp.filter (wp, {}, sort = srt)
 # end def valid_wps
 
-def valid_leave_wps (db, user = None, date = None, srt = None) :
+def valid_leave_wps (db, user = None, date = None, srt = None, thawed = None) :
+    """ If thawed is given, find only WPs with an end-time > freeze date
+        If thawed *and* a date is given we use the *later* date
+        Note that for thawed to work a user must be given
+    """
+    if thawed and user :
+        freeze = freeze_date (db, user)
+        if freeze and date :
+            date = max (freeze, date)
+        elif freeze :
+            date = freeze
     d = {'project.approval_required' : True}
     return valid_wps (db, d, user, date, srt)
 # end def valid_leave_wps
