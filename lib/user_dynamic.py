@@ -991,6 +991,7 @@ dynuser_copyfields = \
      , 'contract_type'
      , 'vac_aliq'
      , 'max_flexitime'
+     , 'do_auto_wp'
      ]
 
 #END
